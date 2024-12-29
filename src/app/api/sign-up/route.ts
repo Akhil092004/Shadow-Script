@@ -45,16 +45,17 @@ export async function POST(request :Request){
         }
         else{
             const hashedPass = await bcrypt.hash(password,10)
-            const expiryDate = new Date()
+            const verifyCodeExpiry = new Date()
 
-            expiryDate.setHours(expiryDate.getHours() + 1)
+            verifyCodeExpiry.setHours(verifyCodeExpiry.getHours() + 1)
 
             const newUser =  new UserModel({
                 username,
                 email,
+                password,
                 hashedPass,
                 verifyCode,
-                expiryDate,
+                verifyCodeExpiry,
                 isVerified : false,
                 isAcceptingMesaage : true,
                 messages : []
