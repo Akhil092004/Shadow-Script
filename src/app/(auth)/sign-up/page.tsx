@@ -12,7 +12,7 @@ import { signUpSchema } from '@/schemas/signUpSchema'
 import { set } from 'mongoose'
 import axios, { AxiosError } from 'axios'
 import { ApiResponse } from '@/types/ApiResponse'
-import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '@/components/ui/form'
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
@@ -88,7 +88,7 @@ const Page = () => {
 
 
   return (
-    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
+    <div className='flex justify-center items-center min-h-screen bg-gray-800'>
       <div className='w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
@@ -153,7 +153,7 @@ const Page = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting}>
+            <Button className = "w-full"type="submit" disabled={isSubmitting}>
               {
                 isSubmitting ? (
                   <>

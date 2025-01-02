@@ -5,11 +5,13 @@ import UserModel from "@/model/User";
 
 export async function POST(request :Request){
     await dbConnect()
+    // console.log("verify request send")
 
     try {
         const {username,code} = await request.json()
-
+        
         const decodedUsername = decodeURIComponent(username)
+        console.log("username",username)
 
         const user = await  UserModel.findOne({username:decodedUsername})
 

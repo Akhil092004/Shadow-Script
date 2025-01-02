@@ -9,7 +9,6 @@ import UserModel from "@/model/User";
 export const authOptions : NextAuthOptions = {
     providers:[
         CredentialsProvider({
-
             id:"credentials",
             name : "Credentials",
 
