@@ -4,10 +4,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { User } from "next-auth";
 
-export async function DELETE(request: Request, context: { params: { messageid: string } }) {
+export async function DELETE(request: Request, { params }: { params: Record<string, string> }) {
     await dbConnect();
 
-    const { messageid: messageId } = context.params;
+    const messageId = params.messageid;
 
     const session = await getServerSession(authOptions);
     const user: User = session?.user as User;
@@ -46,7 +46,7 @@ export async function DELETE(request: Request, context: { params: { messageid: s
             { status: 200 }
         );
     } catch (error) {
-        console.error("Error in delete-message route", error);
+        console.error("Error in delete-message route:", error);
         return new Response(
             JSON.stringify({
                 success: false,
