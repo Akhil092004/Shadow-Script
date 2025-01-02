@@ -3,8 +3,9 @@ import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { User } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";  // Import NextRequest and NextResponse
 
-export async function DELETE(request: Request, { params }: { params: Record<string, string> }) {
+export async function DELETE(request: NextRequest, { params }: { params: { messageid: string } }) {
     await dbConnect();
 
     const messageId = params.messageid;
@@ -13,13 +14,10 @@ export async function DELETE(request: Request, { params }: { params: Record<stri
     const user: User = session?.user as User;
 
     if (!session || !session.user) {
-        return new Response(
-            JSON.stringify({
-                success: false,
-                message: "Unauthorized",
-            }),
-            { status: 401 }
-        );
+        return NextResponse.json({
+            success: false,
+            message: "Unauthorized"
+        }, { status: 401 });
     }
 
     try {
@@ -29,30 +27,21 @@ export async function DELETE(request: Request, { params }: { params: Record<stri
         );
 
         if (updatedResult.modifiedCount === 0) {
-            return new Response(
-                JSON.stringify({
-                    success: false,
-                    message: "Message not found or already deleted",
-                }),
-                { status: 404 }
-            );
+            return NextResponse.json({
+                success: false,
+                message: "Message not found or already deleted"
+            }, { status: 404 });
         }
 
-        return new Response(
-            JSON.stringify({
-                success: true,
-                message: "Message deleted successfully",
-            }),
-            { status: 200 }
-        );
+        return NextResponse.json({
+            success: true,
+            message: "Message deleted successfully"
+        }, { status: 200 });
     } catch (error) {
-        console.error("Error in delete-message route:", error);
-        return new Response(
-            JSON.stringify({
-                success: false,
-                message: "Internal Server Error",
-            }),
-            { status: 500 }
-        );
+        console.log("Error in delete-message route", error);
+        return NextResponse.json({
+            success: false,
+            message: "Internal Server Error"
+        }, { status: 500 });
     }
 }
