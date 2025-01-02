@@ -18,8 +18,8 @@ function Navbar() {
         </a>
         {session ? (
           <>
-            <span className="mr-4">
-              Welcome, {user?.username || user?.email}
+            <span className="mr-4 text-lg">
+              Welcome, {user?.username?.toUpperCase() || user?.email}
             </span>
             <Button onClick={() => signOut()} className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>
               Logout

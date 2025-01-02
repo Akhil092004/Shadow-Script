@@ -22,14 +22,16 @@ export async function POST(request : Request){
 
     const userId = user._id;
     const {acceptMessages} = await request.json()
+    // console.log(acceptMessages)
 
 
     try {
         const updatedUser = await UserModel.findByIdAndUpdate(
             userId,
-            {isAcceptingMesaage:acceptMessages},
+            {isAcceptingMessages:acceptMessages},
             {new:true}
         )
+        
 
         if(!updatedUser){
             return Response.json({
@@ -80,6 +82,9 @@ export async function GET(request : Request){
                 message:"User not found"
             },{status:404})
         }
+
+        // foundUser.isAcceptingMessages = !foundUser.isAcceptingMessages;
+        // await foundUser.save();
         
         return Response.json({
             success:true,
