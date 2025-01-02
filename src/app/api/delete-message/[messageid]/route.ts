@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
