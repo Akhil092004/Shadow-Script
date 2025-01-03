@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
@@ -5,10 +6,10 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 import { User } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";  // Import NextRequest and NextResponse
 
-export async function DELETE(request: NextRequest, params : {messageid:string}) {
+export async function DELETE(request: NextRequest, {params}: { params: any }) {
     await dbConnect();
 
-    const messageId = params.messageid; // Use context.params instead of direct destructuring
+    const messageId = params.messageid; 
 
     const session = await getServerSession(authOptions);
     const user: User = session?.user as User;
