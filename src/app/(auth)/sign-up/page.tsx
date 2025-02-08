@@ -16,7 +16,7 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
-
+import GoogleButton from 'react-google-button'
 
 const Page = () => {
   const [username, setUsername] = useState('')
@@ -146,7 +146,7 @@ const Page = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="Passrword" {...field} />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
                     {isCheckingUsername && <Loader2 className='animate-spin'/>}
                   <FormMessage />
@@ -164,6 +164,7 @@ const Page = () => {
             </Button>
           </form>
         </Form>
+        <GoogleButton/>
         <div className="text-center mt-4">
           <p>
             Already a member?{' '}
