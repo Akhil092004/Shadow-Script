@@ -24,6 +24,7 @@ import { ApiResponse } from '@/types/ApiResponse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
+import { useSession } from 'next-auth/react';
 
 const specialChar = '||';
 
@@ -37,6 +38,7 @@ const initialMessageString =
 export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
+  const { data: session } = useSession();
 
   const {
     complete,
@@ -168,12 +170,12 @@ export default function SendMessage() {
         </Card>
       </div>
       <Separator className="my-6" />
-      <div className="text-center">
+      {!session && <div className="text-center">
         <div className="mb-4">Get Your Message Board</div>
         <Link href={'/sign-up'}>
           <Button>Create Your Account</Button>
         </Link>
-      </div>
+      </div>}
     </div>
   );
 }
