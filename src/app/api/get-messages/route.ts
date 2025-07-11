@@ -28,7 +28,7 @@ export async function GET(request: Request) {
       {
         $project: {
           _id: 1,
-          messages: { $reverseArray: { $sortArray: { input: "$messages", sortBy: { createdAt: -1 } } } }
+          messages: {$sortArray: { input: "$messages", sortBy: { createdAt: 1 } } }
         },
       },
     ]).exec();
